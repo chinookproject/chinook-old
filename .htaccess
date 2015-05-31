@@ -1,0 +1,12 @@
+RewriteEngine on
+
+<FilesMatch ".php$">
+AddHandler x-httpd-php54 .php
+</FilesMatch>
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+php_value short_open_tag 1
+
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]

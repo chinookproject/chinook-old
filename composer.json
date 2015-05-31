@@ -1,0 +1,25 @@
+{
+    "name": "chinook/chinook",
+    "description": "Chinook Framework",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "keywords": ["chinook","framework"],
+	"autoload": {
+		"classmap": [
+			"Core/Controllers",
+			"Core/Dispatchers",
+			"Core/Exceptions",
+            "Bootstrap"
+		],
+        "psr-4": {
+            "Controllers\\": "App/Controllers/",
+            "Models\\": "App/Models/",
+            "Areas\\": "App/Areas/",
+            "Config\\": "App/Config/",
+            "Filters\\": "App/Filters/"
+        }
+	},
+    "require": {
+        "chinook/framework": "dev-master"
+    }
+}
