@@ -37,10 +37,10 @@ class Main
         $routeCollection = $this->initAllRouteConfigs ( );
         $this->resolveRouteAndDispatch ( $routeCollection );
 
-        $data = $this->response->send ( ) ?: '';
+        $data = $this->response->send ( ) !== null ? $this->response->send ( ) : '';
 
         if ( $this->response->getContentType() == 'application/json' ) {
-            if ( !is_scalar ( $data ) ) {
+            if ( !is_scalar ( $data ) || is_array ( $data ) ) {
                 return json_encode ( $this->response->send ( ) );
             }
         }
