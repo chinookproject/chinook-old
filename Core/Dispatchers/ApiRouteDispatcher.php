@@ -124,6 +124,19 @@ class ApiRouteDispatcher
             return null;
         }
 
+        // If we have multiple methods, then take the method with the right amount of params
+        if ( count ( $methods ) > 1 )
+        {
+            foreach ( $methods as $index => $method )
+            {
+                if ( count ( $route->params ) === $method->getNumberOfParameters() )
+                {
+                    $methods = array ( $method );
+                    break;
+                }
+            }
+        }
+
         $method = array_shift ( $methods );
         return $method->name;
     }

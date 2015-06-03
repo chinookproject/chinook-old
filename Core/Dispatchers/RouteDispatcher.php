@@ -47,10 +47,16 @@ class RouteDispatcher implements IDispatcher
         if ( !method_exists ( $controller, $actionName ) )
             throw new ActionNotFoundException ( );
 
-        $controller->executeBeforeFilters ( $this->ioc, $controller, $actionName );
+        $result = $controller->executeBeforeFilters ( $this->ioc, $controller, $actionName );
+        if ( $result !== null ) {
+            return $result;
+        }
+
         $reflectionMethod = new \ReflectionMethod ( $controller, $actionName );
         $returnData = $reflectionMethod->invokeArgs ( $controller, $route->params );
-        $controller->executeAfterFilters ( $this->ioc, $controller, $actionName );
+        $result = $controller->executeAfterFilters ( $this->ioc, $controller, $actionName );
+        if ( $result !== null )
+            return $result;
 
         return $returnData;
     }
